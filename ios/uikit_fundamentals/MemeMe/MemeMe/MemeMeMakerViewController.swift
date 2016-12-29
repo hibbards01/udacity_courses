@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  MemeMeMakerViewController.swift
 //  MemeMe
 //
 //  Created by Hibbard, Samuel on 12/12/16.
@@ -10,8 +10,10 @@ import UIKit
 import Photos
 import AVFoundation
 
-class MainViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
-
+/**
+    Main controller for creating a MemeMe.
+ */
+class MemeMeMakerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     //
     // IBOutlets to the MainViewController on Main.storyboard.
     //
@@ -28,17 +30,17 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     //
     // ENUM for device permissions.
     //
-    enum DevicePermission: Int {
-        case camera
-        case photoLibrary
+    enum DevicePermission: String {
+        case camera = "Camera access required for this feature."
+        case photoLibrary = "Photo Library access required for this feature"
     }
 
     //
     // Error codes if there is an error.
     //
-    enum MainViewControllerError: Int {
-        case one
-        case two
+    enum MainViewControllerError: String {
+        case one = "You must pick an image in order to share."
+        case two = "Unable to create MemeMe Image. Please try again."
     }
 
     typealias PermissionClosure = (Bool) -> Void // Used to tell the caller the permission.
@@ -66,7 +68,7 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         setImageHeight()
 
         // Look for taps made on the view.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MainViewController.dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MemeMeMakerViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
 
@@ -355,10 +357,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     permission.
      */
     private func showAlert(for service: DevicePermission) {
-        let messages = ["Camera access required for this feature.", "Photo Library access required for this feature"]
-
         // First create the UIAlertController.
-        let alert = UIAlertController(title: "Permission Needed", message: messages[service.rawValue], preferredStyle: .alert)
+        let alert = UIAlertController(title: "Permission Needed", message: service.rawValue, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
             guard let url = URL(string: UIApplicationOpenSettingsURLString) else {
                 return
@@ -381,10 +381,8 @@ class MainViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         @param error The enum error code.
      */
     private func showError(with error: MainViewControllerError) {
-        let messages = ["You must pick an image in order to share.", "Unable to create MemeMe Image. Please try again."]
-
         // Now create the UIAlertConroller.
-        let alert = UIAlertController(title: messages[error.rawValue], message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: error.rawValue, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
 
         // Now present it to the user.
