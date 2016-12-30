@@ -1,5 +1,5 @@
 //
-//  MemeMeMakerViewController.swift
+//  MemeMakerViewController.swift
 //  MemeMe
 //
 //  Created by Hibbard, Samuel on 12/12/16.
@@ -13,7 +13,7 @@ import AVFoundation
 /**
     Main controller for creating a MemeMe.
  */
-class MemeMeMakerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
+class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     //
     // IBOutlets to the MainViewController on Main.storyboard.
     //
@@ -68,7 +68,7 @@ class MemeMeMakerViewController: UIViewController, UIImagePickerControllerDelega
         setImageHeight()
 
         // Look for taps made on the view.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MemeMeMakerViewController.dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MemeMakerViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
 
@@ -98,7 +98,26 @@ class MemeMeMakerViewController: UIViewController, UIImagePickerControllerDelega
         // Make sure the image and one of the textfields is filled.
         if imageView.image != nil {
             if let image = createMemeImage() {
+                // Now create the controller and show it to the user. Also create a completion handler to see
+                // if we need to save the image or not.
                 let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                activityVC.completionWithItemsHandler = {(activity, success, items, error) in
+                    // If successful then save the meme and dismiss this controller.
+                    var reloadData = false
+                    if success {
+                        Memes.sharedInstance.append(image: self.imageView.image!, topText: self.topTextView.text, bottomText: self.bottomTextView.text, memeImage: image)
+                        reloadData = true
+                    }
+
+                    NotificationCenter.default.post(name: NotificationKeys.memeMakerDismissedKey, object: nil, userInfo: ["reloadData": reloadData])
+
+                    // Now dismiss the controller if successful.
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
+                }
+
+                // Finally present the controller.
                 present(activityVC, animated: true, completion: nil)
             }
         } else {
@@ -107,13 +126,11 @@ class MemeMeMakerViewController: UIViewController, UIImagePickerControllerDelega
     }
 
     /**
-        Erase the text and the image to start all over.
+        Dismiss the view controller.
      */
-    @IBAction func restart(_ sender: AnyObject) {
-        imageView.image = nil
-        topTextView.text = "TOP"
-        bottomTextView.text = "BOTTOM"
-        adjustTextFields()
+    @IBAction func dismissModal(_ sender: AnyObject) {
+        NotificationCenter.default.post(name: NotificationKeys.memeMakerDismissedKey, object: nil, userInfo: ["reloadData": false])
+        dismiss(animated: true)
     }
 
     /**
