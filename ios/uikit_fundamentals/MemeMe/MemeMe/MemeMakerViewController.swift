@@ -26,6 +26,8 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var imageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topTextViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomTextViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topTextViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomTextViewWidthConstraint: NSLayoutConstraint!
 
     //
     // ENUM for device permissions.
@@ -112,9 +114,12 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
                     NotificationCenter.default.post(name: NotificationKeys.memeMakerDismissedKey, object: nil, userInfo: ["reloadData": reloadData])
 
                     // Now dismiss the controller if successful.
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: true)
+                    if success {
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true)
+                        }
                     }
+
                 }
 
                 // Finally present the controller.
@@ -220,29 +225,66 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
         Create the Mememe image.
      */
     func createMemeImage() -> UIImage? {
-        // Setup the image context.
-        UIGraphicsBeginImageContext(imageView.frame.size)
+        // Grab the image, text, and their corresponding CGRects' and attributes.
+        // First the image.
+        let orgImage = imageView.image!
+        let imageRect = CGRect(x: 0, y: 0, width: orgImage.size.width, height: orgImage.size
+                .height)
 
-        // Now draw the the view hierarchy.
-        var good = false
+        // First we need to determine how much the image was changed from what the user sees.
+        let imageFrame = getAspectRatioOfImage()
 
-        good = imageView.drawHierarchy(in: imageView.frame, afterScreenUpdates: true)
+        // Find the ratio change given from the imageFrame and the originalImage
+        let ratio = orgImage.size.height / imageFrame.size.height
 
-        if good {
-            good = topTextView.drawHierarchy(in: topTextView.frame, afterScreenUpdates: true)
-        }
+        // Now the text
+        let topText: NSString = NSString(string: topTextView.text)
+        let bottomText: NSString = NSString(string: bottomTextView.text)
+        var topRect = topTextView.frame
+        var bottomRect = bottomTextView.frame
 
-        var image: UIImage? = nil
-        if good {
-            if bottomTextView.drawHierarchy(in: bottomTextView.frame, afterScreenUpdates: true) {
-                image = UIGraphicsGetImageFromCurrentImageContext()!
-            }
-        } else {
-            showError(with: .two)
-        }
+        // Change the text's height to be what the user sees. May need to be bigger or smaller.
+        topRect.size.height = topRect.size.height * ratio
+        bottomRect.size.height = bottomRect.size.height * ratio
 
+        // and it's attributes.
+        let style = NSMutableParagraphStyle()
+        style.alignment = .center
 
-        // Make sure to end the image context.
+        // Change the font size to reflect the image size.
+        let font = topTextView.font!.withSize(40.0 * ratio)
+
+        // Finally save the attributes.
+        let textAttributes = [NSFontAttributeName: font,
+                              NSForegroundColorAttributeName: topTextView.textColor!,
+                              NSParagraphStyleAttributeName: style] as [String : Any]
+
+        // Make the x zero for both topRect and bottomRect. So that it aligns itself to the image.
+        topRect.origin.x = 0
+        bottomRect.origin.x = 0
+
+        // Adjust the y for the texts to be aligned at the top and bottom of the picture.
+        topRect.origin.y = 8
+        bottomRect.origin.y = imageRect.size.height - bottomRect.size.height
+
+        // Also make the width the same as the image.
+        topRect.size.width = imageRect.size.width
+        bottomRect.size.width = imageRect.size.width
+
+        // Start creating the image!
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageRect.size.width, height: imageRect.size.height), true, 0)
+
+        // Now draw the image to the graphics context.
+        orgImage.draw(in: imageRect)
+
+        // Now draw the text.
+        topText.draw(in: topRect, withAttributes: textAttributes)
+        bottomText.draw(in: bottomRect, withAttributes: textAttributes)
+
+        // Grab the new image that was created.
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        // End the process.
         UIGraphicsEndImageContext()
 
         return image
@@ -299,6 +341,17 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
 // MARK: - Private functions for class.
 
     /**
+        Grab the image frame that was changed within the imageView.
+     */
+    private func getAspectRatioOfImage() -> CGRect {
+        // Grab the original image view frame and adjust the height.
+        let imageViewFrame = CGRect(x: imageView.frame.origin.x, y: imageView.frame.origin.y, width: view.frame.width, height: imageViewHeight.constant)
+
+        // Return the frame from the image that was changed within the imageView.
+        return AVMakeRect(aspectRatio: imageView.image!.size, insideRect: imageViewFrame)
+    }
+
+    /**
         Set the image height based off the height of the screen.
      */
     private func setImageHeight() {
@@ -311,12 +364,9 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
     private func adjustTextFields() {
         // If there is no image then set the constants to 8 by default.
         var constant: CGFloat = 8.0
+        var width: CGFloat = 375
         if imageView.image != nil {
-            // Grab the original image view frame and adjust the height.
-            let imageViewFrame = CGRect(x: imageView.frame.origin.x, y: imageView.frame.origin.y, width: view.frame.width, height: imageViewHeight.constant)
-
-            // Grab the height from the image that was changed within the imageView.
-            let imageFrame = AVMakeRect(aspectRatio: imageView.image!.size, insideRect: imageViewFrame)
+            let imageFrame = getAspectRatioOfImage()
 
             // Now see if the image's height is the same as the imageView.
             if imageViewHeight.constant == imageFrame.height {
@@ -328,10 +378,17 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
                 // Half that for the two gaps to grab the constant needed for the constraints.
                 constant = (imageViewHeight.constant - imageFrame.height) / 2
             }
+
+            width = imageFrame.width
         }
 
+        // Now adjust the gaps according to the constant
         topTextViewConstraint.constant = constant
         bottomTextViewConstraint.constant = constant
+
+        // Make the width the same as the image.
+        topTextViewWidthConstraint.constant = width
+        bottomTextViewWidthConstraint.constant = width
     }
 
     /**

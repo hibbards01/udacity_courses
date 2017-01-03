@@ -130,11 +130,6 @@ final class Meme: NSObject, NSCoding {
     private class func loadImage(from path: String) -> UIImage {
         // Grab the image from the path that was given.
         let fullPath = Meme.fullDocumentsPath(append: path)
-        if FileManager.default.fileExists(atPath: fullPath) {
-            print("TRUE")
-        } else {
-            print("NOPE")
-        }
         guard let image = UIImage(contentsOfFile: fullPath) else {
             return UIImage()
         }

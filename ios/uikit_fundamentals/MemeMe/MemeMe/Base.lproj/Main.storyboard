@@ -36,14 +36,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeReuseCell" textLabel="pfy-kF-U6K" style="IBUITableViewCellStyleDefault" id="9cS-fq-1Re">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeReuseCell" textLabel="PrX-ti-Ocm" style="IBUITableViewCellStyleDefault" id="9cS-fq-1Re" customClass="ListViewCell" customModule="MemeMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9cS-fq-1Re" id="hDg-fP-YcS">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pfy-kF-U6K">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PrX-ti-Ocm">
                                             <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -110,7 +110,7 @@
         <scene sceneID="zbX-pr-9ME">
             <objects>
                 <collectionViewController id="ObE-Rc-qTk" userLabel="Grid View Controller" customClass="GridViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="YVX-Q3-QoN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="YVX-Q3-QoN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -229,6 +229,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="TOP" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5mo-NS-I6j">
                                         <rect key="frame" x="0.0" y="8" width="375" height="115"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="375" id="QY4-Ty-C4k"/>
                                             <constraint firstAttribute="height" constant="115" id="lPm-EA-UiP"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,6 +240,7 @@
                                         <rect key="frame" x="0.0" y="456" width="375" height="115"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="115" id="59s-mr-DNg"/>
+                                            <constraint firstAttribute="width" constant="375" id="81P-4m-KGG"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
@@ -247,19 +249,17 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="qDY-Jx-eB6" firstAttribute="top" secondItem="z18-8S-k4K" secondAttribute="top" id="0tD-ix-Ivx"/>
-                                    <constraint firstAttribute="trailing" secondItem="5mo-NS-I6j" secondAttribute="trailing" id="LX3-Rq-Ykw"/>
                                     <constraint firstItem="qDY-Jx-eB6" firstAttribute="leading" secondItem="z18-8S-k4K" secondAttribute="leading" id="OOR-Xi-Qym"/>
                                     <constraint firstItem="bMt-6E-Nqw" firstAttribute="top" secondItem="ZGB-Ve-ypJ" secondAttribute="bottom" constant="8" id="OZl-pb-wzN"/>
                                     <constraint firstItem="qDY-Jx-eB6" firstAttribute="centerX" secondItem="z18-8S-k4K" secondAttribute="centerX" id="OoJ-3F-l4x"/>
                                     <constraint firstAttribute="trailing" secondItem="qDY-Jx-eB6" secondAttribute="trailing" id="PH5-6I-Njm"/>
+                                    <constraint firstItem="5mo-NS-I6j" firstAttribute="centerX" secondItem="z18-8S-k4K" secondAttribute="centerX" id="QUs-Lr-qTK"/>
                                     <constraint firstAttribute="bottom" secondItem="bMt-6E-Nqw" secondAttribute="bottom" id="Tsa-lO-ueJ"/>
                                     <constraint firstAttribute="trailing" secondItem="bMt-6E-Nqw" secondAttribute="trailing" id="YuJ-TV-noN"/>
-                                    <constraint firstItem="ZGB-Ve-ypJ" firstAttribute="leading" secondItem="z18-8S-k4K" secondAttribute="leading" id="c4I-j0-k39"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZGB-Ve-ypJ" secondAttribute="trailing" id="ch7-1c-Qdm"/>
                                     <constraint firstItem="bMt-6E-Nqw" firstAttribute="leading" secondItem="z18-8S-k4K" secondAttribute="leading" id="esO-oH-iam"/>
                                     <constraint firstItem="bMt-6E-Nqw" firstAttribute="top" secondItem="qDY-Jx-eB6" secondAttribute="bottom" id="foo-XI-OwN"/>
+                                    <constraint firstItem="ZGB-Ve-ypJ" firstAttribute="centerX" secondItem="z18-8S-k4K" secondAttribute="centerX" id="ouw-GI-dIw"/>
                                     <constraint firstItem="5mo-NS-I6j" firstAttribute="top" secondItem="z18-8S-k4K" secondAttribute="top" constant="8" id="q6y-uX-Fgr"/>
-                                    <constraint firstItem="5mo-NS-I6j" firstAttribute="leading" secondItem="z18-8S-k4K" secondAttribute="leading" id="xnZ-QZ-1DW"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -280,12 +280,14 @@
                     <connections>
                         <outlet property="bottomTextView" destination="ZGB-Ve-ypJ" id="kL7-J2-bgn"/>
                         <outlet property="bottomTextViewConstraint" destination="OZl-pb-wzN" id="xHf-sa-BaV"/>
+                        <outlet property="bottomTextViewWidthConstraint" destination="81P-4m-KGG" id="hJi-xC-LTL"/>
                         <outlet property="bottomToolbar" destination="bMt-6E-Nqw" id="BdJ-oD-Mvd"/>
                         <outlet property="imageView" destination="qDY-Jx-eB6" id="8Nm-Wh-nTv"/>
                         <outlet property="imageViewHeight" destination="fcX-N7-0SN" id="VL6-9w-VGA"/>
                         <outlet property="scrollView" destination="z18-8S-k4K" id="nOa-Ws-lF6"/>
                         <outlet property="topTextView" destination="5mo-NS-I6j" id="0Ty-2e-wyJ"/>
                         <outlet property="topTextViewConstraint" destination="q6y-uX-Fgr" id="JqI-h3-Wbs"/>
+                        <outlet property="topTextViewWidthConstraint" destination="QY4-Ty-C4k" id="BzZ-nV-5nt"/>
                         <outlet property="topToolbar" destination="fL5-v9-HPa" id="e8Q-2l-NG2"/>
                     </connections>
                 </viewController>
@@ -299,6 +301,6 @@
         <image name="iconList" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="b8F-dk-bo9"/>
+        <segue reference="Eze-22-Hf5"/>
     </inferredMetricsTieBreakers>
 </document>

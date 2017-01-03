@@ -38,6 +38,9 @@ class ListViewController: UITableViewController {
 
         // Remove the line separtor in the table.
         tableView.separatorStyle = .none
+
+        // Set the height for all the rows.
+        tableView.rowHeight = 105
     }
 
     /**
@@ -75,9 +78,14 @@ class ListViewController: UITableViewController {
         let meme = Memes.sharedInstance.data[indexPath.row]
 
         // Start creating the cell. Set the image and text to what is given.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeReuseCell")!
-        cell.textLabel?.text = "\(meme.topText) \(meme.bottomText)"
+        let cell = ListViewCell(style: .default, reuseIdentifier: "MemeReuseCell")
         cell.imageView?.image = meme.memeImage
+        cell.imageView?.backgroundColor = UIColor.black
+
+        // Change the text a little bit if it is longer then the max length of the label.
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.numberOfLines = 2
+        cell.textLabel?.text = "\(meme.topText) . . . \(meme.bottomText)"
 
         return cell
     }
