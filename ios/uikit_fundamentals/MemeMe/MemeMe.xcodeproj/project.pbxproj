@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E09CC6C1E2D1E3800AF648B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09CC6B1E2D1E3800AF648B /* LaunchScreen.xib */; };
 		7E293E9B1DFEFC0900AE53AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E293E9A1DFEFC0900AE53AC /* AppDelegate.swift */; };
 		7E293E9D1DFEFC0900AE53AC /* MemeMakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E293E9C1DFEFC0900AE53AC /* MemeMakerViewController.swift */; };
 		7E293EA01DFEFC0900AE53AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E293E9E1DFEFC0900AE53AC /* Main.storyboard */; };
 		7E293EA21DFEFC0900AE53AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E293EA11DFEFC0900AE53AC /* Assets.xcassets */; };
-		7E293EA51DFEFC0900AE53AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E293EA31DFEFC0900AE53AC /* LaunchScreen.storyboard */; };
+		E3545128D72E3D2FDC312986 /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3545F1DFE970EFD6200BF52 /* GridViewCell.swift */; };
+		E35455859A711539711CCE62 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3545C77FE6CEB36C8311FCF /* DetailViewController.swift */; };
 		E35456D5F6FBEBF4B351F01A /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35459692A7E1D9D08002943 /* ListViewController.swift */; };
 		E35459F65A432160BC43CD7F /* Memes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35459566102F2FA220893FE /* Memes.swift */; };
 		E3545A254A80FCC2FA31E797 /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35452E12B73AF3774771BB2 /* ListViewCell.swift */; };
@@ -19,17 +21,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E09CC6B1E2D1E3800AF648B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		7E293E971DFEFC0900AE53AC /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E293E9A1DFEFC0900AE53AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E293E9C1DFEFC0900AE53AC /* MemeMakerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMakerViewController.swift; sourceTree = "<group>"; };
 		7E293E9F1DFEFC0900AE53AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E293EA11DFEFC0900AE53AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7E293EA41DFEFC0900AE53AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E293EA61DFEFC0900AE53AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E35452E12B73AF3774771BB2 /* ListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		E354572D8B3639634AEF40E8 /* GridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		E35459566102F2FA220893FE /* Memes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memes.swift; sourceTree = "<group>"; };
 		E35459692A7E1D9D08002943 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		E3545C77FE6CEB36C8311FCF /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		E3545F1DFE970EFD6200BF52 /* GridViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,16 +66,18 @@
 		7E293E991DFEFC0900AE53AC /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
+				7E09CC6B1E2D1E3800AF648B /* LaunchScreen.xib */,
 				7E293E9A1DFEFC0900AE53AC /* AppDelegate.swift */,
 				7E293E9C1DFEFC0900AE53AC /* MemeMakerViewController.swift */,
 				7E293E9E1DFEFC0900AE53AC /* Main.storyboard */,
 				7E293EA11DFEFC0900AE53AC /* Assets.xcassets */,
-				7E293EA31DFEFC0900AE53AC /* LaunchScreen.storyboard */,
 				7E293EA61DFEFC0900AE53AC /* Info.plist */,
 				E35459566102F2FA220893FE /* Memes.swift */,
 				E35459692A7E1D9D08002943 /* ListViewController.swift */,
 				E354572D8B3639634AEF40E8 /* GridViewController.swift */,
 				E35452E12B73AF3774771BB2 /* ListViewCell.swift */,
+				E3545F1DFE970EFD6200BF52 /* GridViewCell.swift */,
+				E3545C77FE6CEB36C8311FCF /* DetailViewController.swift */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";
@@ -136,8 +142,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E293EA51DFEFC0900AE53AC /* LaunchScreen.storyboard in Resources */,
 				7E293EA21DFEFC0900AE53AC /* Assets.xcassets in Resources */,
+				7E09CC6C1E2D1E3800AF648B /* LaunchScreen.xib in Resources */,
 				7E293EA01DFEFC0900AE53AC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +161,8 @@
 				E35456D5F6FBEBF4B351F01A /* ListViewController.swift in Sources */,
 				E3545C2DC53E1254E23358AB /* GridViewController.swift in Sources */,
 				E3545A254A80FCC2FA31E797 /* ListViewCell.swift in Sources */,
+				E3545128D72E3D2FDC312986 /* GridViewCell.swift in Sources */,
+				E35455859A711539711CCE62 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,14 +175,6 @@
 				7E293E9F1DFEFC0900AE53AC /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		7E293EA31DFEFC0900AE53AC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7E293EA41DFEFC0900AE53AC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

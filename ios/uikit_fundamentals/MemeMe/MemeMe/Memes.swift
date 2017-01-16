@@ -21,7 +21,8 @@ enum MemeKeys: String {
 }
 
 struct NotificationKeys {
-    static let memeMakerDismissedKey = Notification.Name("MemeMakerViewControllerDismissed")
+    static let reloadListViewControllerKey = Notification.Name("ReloadListViewController")
+    static let reloadGridViewControllerKey = Notification.Name("ReloadGridViewController")
 }
 
 /**
@@ -41,7 +42,7 @@ final class Meme: NSObject, NSCoding {
     //
 
     /**
-        Non-default Constructor
+        Non-default constructor
      */
     init(top: String, bottom: String, imageFilePath: String, memeImageFilePath: String) {
         self.topText = top

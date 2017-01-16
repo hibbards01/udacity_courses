@@ -24,10 +24,13 @@ class ListViewCell: UITableViewCell {
         super.layoutSubviews()
 
         // First make the image and text bigger.
-        imageView?.frame = CGRect(x: 0, y: 0, width: 160, height: frame.height)
+        imageView?.frame = CGRect(x: 0, y: 0, width: 140, height: frame.height)
         imageView?.contentMode = .scaleAspectFit
+        imageView?.backgroundColor = UIColor.black
 
         // Customize the text as well
-        textLabel?.frame = CGRect(x: 170, y: 0, width: frame.width - 170, height: frame.height)
+        textLabel?.frame = CGRect(x: 150, y: 0, width: frame.width - 150, height: frame.height)
+        textLabel?.adjustsFontSizeToFitWidth = true
+        textLabel?.numberOfLines = 2
     }
 }

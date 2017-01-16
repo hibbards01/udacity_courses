@@ -15,7 +15,7 @@ import AVFoundation
  */
 class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
     //
-    // IBOutlets to the MainViewController on Main.storyboard.
+    // IBOutlets to the MemeMakerViewController in Main.storyboard.
     //
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topToolbar: UIToolbar!
@@ -105,21 +105,18 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
                 let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
                 activityVC.completionWithItemsHandler = {(activity, success, items, error) in
                     // If successful then save the meme and dismiss this controller.
-                    var reloadData = false
                     if success {
                         Memes.sharedInstance.append(image: self.imageView.image!, topText: self.topTextView.text, bottomText: self.bottomTextView.text, memeImage: image)
-                        reloadData = true
-                    }
 
-                    NotificationCenter.default.post(name: NotificationKeys.memeMakerDismissedKey, object: nil, userInfo: ["reloadData": reloadData])
+                        // Notify the controllers to reload their data.
+                        NotificationCenter.default.post(name: NotificationKeys.reloadListViewControllerKey, object: nil)
+                        NotificationCenter.default.post(name: NotificationKeys.reloadGridViewControllerKey, object: nil)
 
-                    // Now dismiss the controller if successful.
-                    if success {
+                        // Dismiss this controller.
                         DispatchQueue.main.async {
                             self.dismiss(animated: true)
                         }
                     }
-
                 }
 
                 // Finally present the controller.
@@ -134,7 +131,7 @@ class MemeMakerViewController: UIViewController, UIImagePickerControllerDelegate
         Dismiss the view controller.
      */
     @IBAction func dismissModal(_ sender: AnyObject) {
-        NotificationCenter.default.post(name: NotificationKeys.memeMakerDismissedKey, object: nil, userInfo: ["reloadData": false])
+        NotificationCenter.default.post(name: NotificationKeys.reloadListViewControllerKey, object: nil, userInfo: ["reloadData": false])
         dismiss(animated: true)
     }
 

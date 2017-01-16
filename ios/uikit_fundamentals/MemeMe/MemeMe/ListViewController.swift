@@ -14,20 +14,22 @@ import UIKit
  */
 class ListViewController: UITableViewController {
     //
-    // Memeber functions
+    // Member functions
     //
 
     /**
         Reload the data.
      */
-    func reload(_ notification: NSNotification) {
-        // Remove the notification that was created.
-        NotificationCenter.default.removeObserver(self, name: NotificationKeys.memeMakerDismissedKey, object: nil)
+    func reload() {
+        tableView.reloadData()
+    }
 
-        // Grab the userinfo data to see if the table needs to be reloaded.
-        if (notification.userInfo?["reloadData"] as? Bool)! {
-            tableView.reloadData()
-        }
+    /**
+        Deconstructor.
+     */
+    deinit {
+        // Remove the notification that was created.
+        NotificationCenter.default.removeObserver(self, name: NotificationKeys.reloadListViewControllerKey, object: nil)
     }
 
     //
@@ -41,12 +43,22 @@ class ListViewController: UITableViewController {
 
         // Set the height for all the rows.
         tableView.rowHeight = 105
+
+        // Create the notification for this controller.
+        NotificationCenter.default.addObserver(self, selector: #selector(reload), name: NotificationKeys.reloadListViewControllerKey, object: nil)
     }
 
     /**
         Show the picture that the user selected.
      */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Initialize the DetailViewController and set the image.
+        if let controller = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+            controller.meme = Memes.sharedInstance.data[indexPath.row]
+
+            // Now present it using the NavigationController.
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 
     /**
@@ -78,27 +90,10 @@ class ListViewController: UITableViewController {
         let meme = Memes.sharedInstance.data[indexPath.row]
 
         // Start creating the cell. Set the image and text to what is given.
-        let cell = ListViewCell(style: .default, reuseIdentifier: "MemeReuseCell")
+        let cell = ListViewCell(style: .default, reuseIdentifier: "ListViewCellReuse")
         cell.imageView?.image = meme.memeImage
-        cell.imageView?.backgroundColor = UIColor.black
-
-        // Change the text a little bit if it is longer then the max length of the label.
-        cell.textLabel?.adjustsFontSizeToFitWidth = true
-        cell.textLabel?.numberOfLines = 2
         cell.textLabel?.text = "\(meme.topText) . . . \(meme.bottomText)"
 
         return cell
-    }
-
-    /**
-        Prepare a notification to get notified if this controller needs to reload the data.
-     */
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-
-        if segue.identifier == "MemeMakerViewController" {
-            // Create the notification for this controller.
-            NotificationCenter.default.addObserver(self, selector: #selector(reload(_:)), name: NotificationKeys.memeMakerDismissedKey, object: nil)
-        }
     }
 }
