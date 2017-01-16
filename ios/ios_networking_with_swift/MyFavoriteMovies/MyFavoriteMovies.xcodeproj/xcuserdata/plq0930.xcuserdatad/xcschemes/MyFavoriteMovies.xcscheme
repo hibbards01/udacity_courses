@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7E09CC791E2D564E00AF648B"
+               BlueprintIdentifier = "A9A3A22D1BEBE25C009BE8E1"
                BuildableName = "MyFavoriteMovies.app"
                BlueprintName = "MyFavoriteMovies"
                ReferencedContainer = "container:MyFavoriteMovies.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7E09CC791E2D564E00AF648B"
+            BlueprintIdentifier = "A9A3A22D1BEBE25C009BE8E1"
             BuildableName = "MyFavoriteMovies.app"
             BlueprintName = "MyFavoriteMovies"
             ReferencedContainer = "container:MyFavoriteMovies.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7E09CC791E2D564E00AF648B"
+            BlueprintIdentifier = "A9A3A22D1BEBE25C009BE8E1"
             BuildableName = "MyFavoriteMovies.app"
             BlueprintName = "MyFavoriteMovies"
             ReferencedContainer = "container:MyFavoriteMovies.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7E09CC791E2D564E00AF648B"
+            BlueprintIdentifier = "A9A3A22D1BEBE25C009BE8E1"
             BuildableName = "MyFavoriteMovies.app"
             BlueprintName = "MyFavoriteMovies"
             ReferencedContainer = "container:MyFavoriteMovies.xcodeproj">
