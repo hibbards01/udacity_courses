@@ -20,6 +20,7 @@
 		A9A3A2541BEC11F7009BE8E1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A3A2521BEC11F7009BE8E1 /* Config.swift */; };
 		A9A3A2551BEC11F7009BE8E1 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A3A2531BEC11F7009BE8E1 /* Movie.swift */; };
 		A9FA13471D1AB6D800B5F46E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9FA13451D1AB6D800B5F46E /* LaunchScreen.xib */; };
+		E35456A60163DE985622D5DE /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E354593695EA33435DEE3DC0 /* ServiceRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		A9A3A2521BEC11F7009BE8E1 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A9A3A2531BEC11F7009BE8E1 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		A9FA13461D1AB6D800B5F46E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		E354593695EA33435DEE3DC0 /* ServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				A9A3A23D1BEBE25C009BE8E1 /* Info.plist */,
+				E354593695EA33435DEE3DC0 /* ServiceRequest.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -152,7 +155,7 @@
 				TargetAttributes = {
 					A9A3A22D1BEBE25C009BE8E1 = {
 						CreatedOnToolsVersion = 7.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -202,6 +205,7 @@
 				A9A3A2541BEC11F7009BE8E1 /* Config.swift in Sources */,
 				A9A3A24F1BEC11DE009BE8E1 /* FavoritesTableViewController.swift in Sources */,
 				A9A3A24A1BEC0208009BE8E1 /* GCDBlackBox.swift in Sources */,
+				E35456A60163DE985622D5DE /* ServiceRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -306,7 +310,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
