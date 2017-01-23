@@ -46,6 +46,12 @@ struct Constants {
         static let UserID = "id"
         static let Results = "results"
     }
+
+    struct TMDBBodyKeys {
+        static let mediaType = "media_type"
+        static let mediaID = "media_id"
+        static let favorite = "favorite"
+    }
     
     // MARK: UI
     struct UI {

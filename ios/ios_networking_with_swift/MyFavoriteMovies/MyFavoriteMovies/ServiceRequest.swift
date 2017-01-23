@@ -11,11 +11,27 @@ import Foundation
 /**
     Enum extension types. This will be used for the request in ServiceRequest.
  */
-enum ServiceRequestExtension: String {
-    case requestToken = "/authentication/token/new"
-    case login = "/authentication/token/validate_with_login"
-    case createSession = "/authentication/session/new"
-    case getAccount = "/account"
+enum ServiceRequestExtension {
+    case requestToken
+    case login
+    case createSession
+    case getAccount
+    case setFavorite(String)
+
+    var url: String {
+        switch self {
+            case .requestToken:
+                return "/authentication/token/new"
+            case .login:
+                return "/authentication/token/validate_with_login"
+            case .createSession:
+                return "/authentication/session/new"
+            case .getAccount:
+                return "/account"
+            case let .setFavorite(id):
+                return "/account/\(id)/favorite"
+        }
+    }
 }
 
 /**
@@ -34,9 +50,27 @@ class ServiceRequest {
         @discussion      This will make the request and return true for a successful request.
                          False otherwise.
      */
-    func sendRequest(to extensionPath: ServiceRequestExtension, with params: [String: AnyObject], completion: @escaping (Bool, [String: AnyObject]?, String?) -> Void) {
+    func sendRequest(to extensionPath: ServiceRequestExtension,
+                     with urlParams: [String: AnyObject],
+                     in method: String = "GET",
+                     postData: [String: AnyObject]? = nil,
+                     completion: @escaping (Bool, [String: AnyObject]?, String?) -> Void) {
         // First build the url with it's body.
-        let request = URLRequest(url: buildURL(add: extensionPath, with: params))
+        var request = URLRequest(url: buildURL(add: extensionPath, with: urlParams))
+
+        // Set the header for the request.
+        request.httpMethod = method
+
+        // If this is a post then add to the header.
+        if let postData = postData, method == "POST" {
+            request.allHTTPHeaderFields = ["content-type": "application/json;charset=utf-8"]
+
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: postData, options: .prettyPrinted)
+            } catch {
+                completion(false, nil, "Unable to convert postData into JSON. Here is the error:\n\(error)")
+            }
+        }
 
         // Now make the request.
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -61,17 +95,12 @@ class ServiceRequest {
                 do {
                     jsonData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: AnyObject]
                 } catch {
-                    errorMessage = "Data could not be parsed as JSON. Here is the data returned:\n\(data)"
+                    errorMessage = "Data could not be parsed as JSON. Here is the data returned:\n\(data)\nError:\(error)"
                 }
             } else {
                 if errorMessage == nil {
-                    errorMessage = "No data returned from request. Here is the data returned:\n\(data)"
+                    errorMessage = "No data returned from request."
                 }
-            }
-
-            // Make sure that TheMoviewDB did not return an error.
-            if let status = jsonData?[Constants.TMDBResponseKeys.StatusCode] as? Int, let message = jsonData?[Constants.TMDBResponseKeys.StatusMessage] {
-                errorMessage = "Error with TheMovieDB api. Here is the status code: \(status) with message:\n\(message)"
             }
 
             // See if the request a success or not.
@@ -101,21 +130,21 @@ class ServiceRequest {
         @param extension The extension for the API call.
         @param params    The POST data that we need to send for the request.
      */
-    private func buildURL(add extensionPath: ServiceRequestExtension? = nil, with params: [String: AnyObject]) -> URL {
+    private func buildURL(add extensionPath: ServiceRequestExtension, with urlParams: [String: AnyObject]) -> URL {
         // Start creating the url.
         var components = URLComponents()
 
         // Build the url.
         components.scheme = Constants.TMDB.ApiScheme
         components.host = Constants.TMDB.ApiHost
-        components.path = Constants.TMDB.ApiPath + (extensionPath?.rawValue ?? "")
+        components.path = Constants.TMDB.ApiPath + extensionPath.url
 
         // Now add the parameters for the body.
-        if params.count > 0 {
+        if urlParams.count > 0 {
             components.queryItems = [URLQueryItem]()
 
             // Loop through the parameters and convert them to a URLQueryItem.
-            for (key, value) in params {
+            for (key, value) in urlParams {
                 let item = URLQueryItem(name: key, value: "\(value)")
                 components.queryItems!.append(item)
             }

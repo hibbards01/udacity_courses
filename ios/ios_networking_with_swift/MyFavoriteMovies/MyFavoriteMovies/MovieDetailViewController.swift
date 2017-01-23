@@ -171,23 +171,44 @@ class MovieDetailViewController: UIViewController {
     // MARK: Favorite Actions
     
     @IBAction func toggleFavorite(_ sender: AnyObject) {
-        
-        // let shouldFavorite = !isFavorite
-        
+        let shouldFavorite = !isFavorite
+
         /* TASK: Add movie as favorite, then update favorite buttons */
-        /* 1. Set the parameters */
+        /* 1. Set the parameters and body. */
+        let params = [
+            Constants.TMDBParameterKeys.ApiKey: Constants.TMDBParameterValues.ApiKey as AnyObject,
+            Constants.TMDBParameterKeys.SessionID: appDelegate.sessionID as AnyObject
+        ]
+
+        // Set the body of the request.
+        let body = [
+            Constants.TMDBBodyKeys.mediaType: "movie" as AnyObject,
+            Constants.TMDBBodyKeys.mediaID: movie!.id as AnyObject,
+            Constants.TMDBBodyKeys.favorite: shouldFavorite as AnyObject
+        ]
+
         /* 2/3. Build the URL, Configure the request */
-        /* 4. Make the request */
-        /* 5. Parse the data */
-        /* 6. Use the data! */
-        /* 7. Start the request */
-        
-        /* If the favorite/unfavorite request completes, then use this code to update the UI...
-        
-        performUIUpdatesOnMain {
-            self.favoriteButton.tintColor = (shouldFavorite) ? nil : UIColor.blackColor()
+        appDelegate.service.sendRequest(to: .setFavorite("\(appDelegate.userID!)"), with: params, in: "POST", postData: body) { success, data, error in
+            // Check the status of the response.
+            if success {
+                guard let status = data?[Constants.TMDBResponseKeys.StatusCode] as? Int else {
+                    print("Could not grab the status key. Here is the data reponse:\n\(data)")
+                    return
+                }
+
+                // Now make sure the status is correct.
+                if  (shouldFavorite && status != 12 && status != 1) || (!shouldFavorite && status != 13) {
+                    print("Unrecognized status: \(status). Here is status message:\n\(data?[Constants.TMDBResponseKeys.StatusMessage])")
+                } else {
+                    self.isFavorite = shouldFavorite
+
+                    DispatchQueue.main.async {
+                        self.favoriteButton.tintColor = (shouldFavorite) ? nil : UIColor.black
+                    }
+                }
+            } else {
+                print(error!)
+            }
         }
-        
-        */
     }
 }
