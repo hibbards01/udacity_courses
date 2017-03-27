@@ -14,11 +14,12 @@ extension TMDBClient {
     struct Constants {
         
         // MARK: API Key
-        static let ApiKey = "YOUR_API_KEY_HERE"
+        static let ApiKey = "791fab63b39e8f3af16ac9d7c463c461"
                         
         // MARK: URLs
         static let ApiScheme = "https"
         static let ApiHost = "api.themoviedb.org"
+        static let imageHost = "image.tmdb.org"
         static let ApiPath = "/3"
         static let AuthorizationURL = "https://www.themoviedb.org/authenticate/"
         static let AccountURL = "https://www.themoviedb.org/account/"
@@ -100,7 +101,7 @@ extension TMDBClient {
     
     // MARK: Poster Sizes
     struct PosterSizes {
-        static let RowPoster = TMDBClient.sharedInstance().config.posterSizes[2]
-        static let DetailPoster = TMDBClient.sharedInstance().config.posterSizes[4]
+        static let RowPoster = TMDBClient.sharedInstance.images.posterSizes[2]
+        static let DetailPoster = TMDBClient.sharedInstance.images.posterSizes[4]
     }
 }

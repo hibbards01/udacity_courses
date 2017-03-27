@@ -24,7 +24,7 @@
 		A9855BDF1BEC4DEB00000031 /* MoviePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9855BDB1BEC4DEB00000031 /* MoviePickerViewController.swift */; };
 		A9855BE01BEC4DEB00000031 /* WatchlistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9855BDC1BEC4DEB00000031 /* WatchlistViewController.swift */; };
 		A9FA13531D1AB73A00B5F46E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9FA13511D1AB73A00B5F46E /* LaunchScreen.xib */; };
-		E3545D2A5D629AADC825ADDF /* ServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E354568272ADE1A0029A420B /* ServiceRequest.swift */; };
+		E3545D2A5D629AADC825ADDF /* ClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E354568272ADE1A0029A420B /* ClientService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,7 @@
 		A9855BDB1BEC4DEB00000031 /* MoviePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePickerViewController.swift; sourceTree = "<group>"; };
 		A9855BDC1BEC4DEB00000031 /* WatchlistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistViewController.swift; sourceTree = "<group>"; };
 		A9FA13521D1AB73A00B5F46E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		E354568272ADE1A0029A420B /* ServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceRequest.swift; sourceTree = "<group>"; };
+		E354568272ADE1A0029A420B /* ClientService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				A9855BD71BEC430C00000031 /* Clients */,
-				E354568272ADE1A0029A420B /* ServiceRequest.swift */,
+				E354568272ADE1A0029A420B /* ClientService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 				A9855BDF1BEC4DEB00000031 /* MoviePickerViewController.swift in Sources */,
 				A9855BD11BEC41F500000031 /* LoginViewController.swift in Sources */,
 				A9855BCD1BEC41A800000031 /* TMDBAuthViewController.swift in Sources */,
-				E3545D2A5D629AADC825ADDF /* ServiceRequest.swift in Sources */,
+				E3545D2A5D629AADC825ADDF /* ClientService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

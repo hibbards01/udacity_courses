@@ -30,6 +30,20 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController!.navigationBar.isTranslucent = false
+        activityIndicator.hidesWhenStopped = true
+
+        // Grab the detail image for this controller
+        activityIndicator.startAnimating()
+        if let movie = movie {
+            movie.getDetailImage { image in
+                if let image = image {
+                    DispatchQueue.main.async {
+                        self.posterImageView.image = UIImage(data: image)
+                        self.activityIndicator.stopAnimating()
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

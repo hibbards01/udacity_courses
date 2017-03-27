@@ -51,6 +51,26 @@ class TMDBAuthViewController: UIViewController {
 // MARK: - TMDBAuthViewController: UIWebViewDelegate
 
 extension TMDBAuthViewController: UIWebViewDelegate {
-    
-    // TODO: Add implementation here
+    /**
+        Check the url to see if the user has given consent.
+     */
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        var allowed: Bool? = nil
+        if let url = webView.request?.url?.absoluteString, let requestToken = requestToken {
+            if url == "\(TMDBClient.Constants.AuthorizationURL)\(requestToken)/allow" {
+                allowed = true
+            } else if url == "\(TMDBClient.Constants.AuthorizationURL)\(requestToken)/deny" {
+                allowed = false
+            }
+
+            // See if we need to dismiss the controller.
+            if let allowed = allowed, let completionHandlerForView = completionHandlerForView {
+                dismiss(animated: true) {
+                    let error = (allowed) ? "" : "User denied access to this app."
+
+                    completionHandlerForView(allowed, error)
+                }
+            }
+        }
+    }
 }
